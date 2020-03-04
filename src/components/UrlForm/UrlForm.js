@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { addUrl } from '../../actions';
 import { postUrl } from '../../apiCalls';
+
 
 
 export class UrlForm extends Component {
@@ -9,7 +12,7 @@ export class UrlForm extends Component {
     this.state = {
       title: '',
       urlToShorten: ''
-    }
+    };
   }
 
   handleNameChange = e => {
@@ -19,6 +22,7 @@ export class UrlForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     postUrl(this.state)
+    .then(res => this.props.addUrl(res))
     this.clearInputs();
   }
 
@@ -53,4 +57,12 @@ export class UrlForm extends Component {
   }
 }
 
-export default UrlForm;
+export const mapStateToProps = state => ({
+  urls: state.urls,
+})
+
+export const mapDispatchToProps = dispatch => ({
+  addUrl: url => dispatch(addUrl(url)),
+})
+
+export default connect(null, mapDispatchToProps)(UrlForm);
