@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { setUrls } from '../../actions';
+import { postUrl } from '../../apiCalls';
 
-class UrlForm extends Component {
+
+export class UrlForm extends Component {
   constructor(props) {
     super();
     this.props = props;
     this.state = {
       title: '',
       urlToShorten: ''
-    };
+    }
   }
 
   handleNameChange = e => {
@@ -18,7 +18,7 @@ class UrlForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    setUrls(this.state)
+    postUrl(this.state)
     this.clearInputs();
   }
 
@@ -53,8 +53,4 @@ class UrlForm extends Component {
   }
 }
 
-export const mapDispatchToProps = dispatch => ({
-  setUrls: urls => dispatch(setUrls(urls)),
-})
-
-export default connect(null, mapDispatchToProps)(UrlForm);
+export default UrlForm;
