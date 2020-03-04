@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import UrlContainer from '../../components/UrlContainer/UrlContainer';
 import UrlForm from '../../components/UrlForm/UrlForm';
