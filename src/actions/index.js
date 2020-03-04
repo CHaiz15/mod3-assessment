@@ -8,3 +8,7 @@ export const addUrl = (url) => ({
   url,
 });
 
+export const deleteSelectedUrl = (url) => ({
+  type: 'DELETE_URL',
+  url,
+});
