@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './UrlContainer.css';
 import { getUrls, deleteUrl } from '../../apiCalls';
 import { connect } from 'react-redux'
-import { setUrls } from '../../actions';
+import { setUrls, deleteSelectedUrl } from '../../actions';
 
 export class UrlContainer extends Component {
   constructor() {
@@ -15,6 +15,11 @@ export class UrlContainer extends Component {
       .catch(err => console.error('Error fetching:', err));
   }
 
+  removeUrl(url) {
+    deleteUrl(url)
+    this.props.deleteSelectedUrl(url)
+  }
+
   render() {
     const { urls } = this.props;
     const urlEls = urls.map(url => {
@@ -23,7 +28,7 @@ export class UrlContainer extends Component {
           <h3>{url.title}</h3>
           <a href={url.short_url} target="blank">{url.short_url}</a>
           <p>{url.long_url}</p>
-          <button onClick={() => deleteUrl(url)}>Delete</button>
+          <button onClick={() => this.removeUrl(url)}>Delete</button>
         </div>
     )
   })
@@ -42,6 +47,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   setUrls: urls => dispatch(setUrls(urls)),
+  deleteSelectedUrl: url => dispatch(deleteSelectedUrl(url)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UrlContainer);
