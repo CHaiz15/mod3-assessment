@@ -1,4 +1,4 @@
-export const urls = (state = [], action) => {
+export const urlsReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_URLS':
       return action.urls;
