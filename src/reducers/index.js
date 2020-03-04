@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { urls } from './urls';
+import { urlsReducer } from './urls';
 
 const rootReducer = combineReducers({
-  urls,
+  urls: urlsReducer,
 });
 
 export default rootReducer;
